@@ -13,8 +13,7 @@
   },
   "dependencies": {
     "level-fix-range": "~1.1.2",
-    "offset-stream": "0.0.0",
-    "ordered-through": "0.0.2"
+    "offset-stream": "0.0.0"
   },
   "devDependencies": {
     "tap": "~0.4.3",

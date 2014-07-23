@@ -1,5 +1,4 @@
 var offsetStream = require('offset-stream');
-var through      = require('ordered-through');
 var fix          = require('level-fix-range');
 
 module.exports = paginate;
@@ -11,12 +10,11 @@ function paginate (db, prefix, opts) {
   var offset = opts.page * opts.num;
   var limit = offset + opts.num;
 
-  return db.createKeyStream(fix({
+  return db.createReadStream(fix({
     reverse : true,
     start   : prefix + '!',
     end     : prefix + '~',
     limit   : limit
   }))
-  .pipe(offsetStream(offset))
-  .pipe(through(db.get.bind(db)))
+  .pipe(offsetStream(offset));
 }
